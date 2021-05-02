@@ -10,51 +10,68 @@ import UIKit
 class ViewController :UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
-      
     
     private enum Item: Hashable {
-        case serieCharacter(SerieCharacter)
+        case character(SerieCharacter)
     }
     
     private var diffableDataSource: UICollectionViewDiffableDataSource<Section, Item>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-        //        setupCollectionView()
-        //        getCharacters()
         
         collectionView.collectionViewLayout = createLayout()
         
         diffableDataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, item) -> UICollectionViewCell? in
             switch item {
-            case .item():
+            case .character(let serieCharacter):
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-            
+               
+                var content = cell.contentConfiguration
+            //                content.textLabel?.text = serieCharacter.name
+            //                content.imageView?.loadImage(from: serieCharacter.imageURL) {
+            //                    cell.setNeedsLayout()
+//            }
             return cell
             }
             
         })
         
-        let snapshot = createSnapshot()
+        let snapshot = createSnapshot(serieCharacters: [])
         diffableDataSource.apply(snapshot)
 
+        
+        NetworkManager.shared.fetchCharacters { (result) in
+            switch result {
+            case .failure(let error):
+                print(error)
+
+            case .success(let paginatedElements):
+                let serieCharacters = paginatedElements.decodedElements
+                let snapshot = self.createSnapshot(serieCharacters: serieCharacters)
+
+
+
+                DispatchQueue.main.async {
+                    self.diffableDataSource.apply(snapshot)
+                }
+            }
+        }
     }
     
     private func createLayout() -> UICollectionViewLayout {
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .fractionalHeight(1.0))
+                                              heightDimension: .fractionalHeight(0.2))
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .absolute(50))
+                                               heightDimension: .absolute(10))
         
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
                                                      subitem: item,
-                                                     count: 2)
+                                                     count: 1)
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 10
@@ -65,36 +82,19 @@ class ViewController :UIViewController {
         return layout
     }
     
-    private func createSnapshot() -> NSDiffableDataSourceSnapshot<Section, SerieCharacter> {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, SerieCharacter>()
+    private func createSnapshot(serieCharacters: [SerieCharacter]) -> NSDiffableDataSourceSnapshot<Section, Item> {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+        
         snapshot.appendSections([.main])
-//        snapshot.appendItems(serieCharacters)
+        
+        let items = serieCharacters.map(Item.character)
+
+        snapshot.appendItems(items, toSection: .main)
         
         return snapshot
     }
-    
-    
-    
-//        func getCharacters() {
-//            NetworkManager.shared.fetchCharacters { result in
-//                switch result{
-//                case .success(let serieCharacters):
-//                    print(serieCharacters)
-//                    self.populate(with: serieCharacters)
-//
-//                case .failure(let error):
-//                    print(error)
-//                }
-//            }
-//        }
-    //
-    //    func populate(with serieCharacters: [SerieCharacter]) {
-    //        var snapshot = NSDiffableDataSourceSnapshot<Section, SerieCharacter>()
-    //        snapshot.appendSections([.main])
-    //        snapshot.appendItems(serieCharacters)
-    //        dataSource?.apply(snapshot)
-    //    }
-    
+  
+   
 }
 
 extension ViewController {
