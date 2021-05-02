@@ -12,6 +12,7 @@
 		C02AE09A263DA02F00007905 /* PaginationInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02AE099263DA02F00007905 /* PaginationInformation.swift */; };
 		C02AE0A0263DA0B100007905 /* UIImageView+addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02AE09F263DA0B100007905 /* UIImageView+addition.swift */; };
 		C0622975263F203D0027E048 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0622974263F203D0027E048 /* MainView.swift */; };
+		C0622981263F3D200027E048 /* PaginatedElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0622980263F3D200027E048 /* PaginatedElements.swift */; };
 		C0D8F96E25E69EEC005FA81F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D8F96D25E69EEC005FA81F /* AppDelegate.swift */; };
 		C0D8F97025E69EEC005FA81F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D8F96F25E69EEC005FA81F /* SceneDelegate.swift */; };
 		C0D8F97225E69EEC005FA81F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D8F97125E69EEC005FA81F /* ViewController.swift */; };
@@ -27,6 +28,7 @@
 		C02AE099263DA02F00007905 /* PaginationInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationInformation.swift; sourceTree = "<group>"; };
 		C02AE09F263DA0B100007905 /* UIImageView+addition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+addition.swift"; sourceTree = "<group>"; };
 		C0622974263F203D0027E048 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		C0622980263F3D200027E048 /* PaginatedElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedElements.swift; sourceTree = "<group>"; };
 		C0D8F96A25E69EEC005FA81F /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0D8F96D25E69EEC005FA81F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0D8F96F25E69EEC005FA81F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 				C02AE099263DA02F00007905 /* PaginationInformation.swift */,
 				C02AE09F263DA0B100007905 /* UIImageView+addition.swift */,
 				C0622974263F203D0027E048 /* MainView.swift */,
+				C0622980263F3D200027E048 /* PaginatedElements.swift */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0622981263F3D200027E048 /* PaginatedElements.swift in Sources */,
 				C0622975263F203D0027E048 /* MainView.swift in Sources */,
 				C0D8F97825E69EEC005FA81F /* RickAndMorty.xcdatamodeld in Sources */,
 				C0D8F97225E69EEC005FA81F /* ViewController.swift in Sources */,

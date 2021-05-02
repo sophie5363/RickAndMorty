@@ -42,11 +42,11 @@ class ViewController :UIViewController {
     
     
     func getCharacters() {
-        NetworkManager.shared.fetchCharacters { [weak self] result in
+        NetworkManager.shared.fetchCharacters { result in
             switch result{
             case .success(let serieCharacters):
                 print(serieCharacters)
-                self?.populate(with: serieCharacters)
+                self.populate(with: serieCharacters)
                 
             case .failure(let error):
                 print(error)
@@ -62,6 +62,8 @@ class ViewController :UIViewController {
     }
     
 }
+
+
 
 extension ViewController {
     enum Section {
